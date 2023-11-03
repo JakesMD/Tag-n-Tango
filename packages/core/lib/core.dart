@@ -1,4 +1,5 @@
-/// A Very Good Project created by Very Good CLI.
+/// The core library for the Tag-n-Tango app. This library exports common
+/// functionality used across the app.
 library tcore;
 
 export 'src/form_inputs/_form_inputs.dart';
