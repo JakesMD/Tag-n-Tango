@@ -15,6 +15,6 @@ class TNFCRepository {
   ///
   /// The stream emits either a [TTagIDStreamException] on error, or a tag ID
   /// string on success.
-  Stream<Either<TTagIDStreamException, String>> tagIDsStream() =>
+  Stream<Either<TTagIDStreamException, Option<String>>> tagIDsStream() =>
       nfcClient.tagIDsStream();
 }

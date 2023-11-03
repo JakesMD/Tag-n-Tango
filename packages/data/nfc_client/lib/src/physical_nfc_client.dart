@@ -6,7 +6,9 @@ import 'package:tnfc_client/nfc_client.dart';
 /// The physical NFC client that reads from NFC tags.
 class TPhysicalNFCClient implements TNFCClient {
   @override
-  Stream<Either<TTagIDStreamException, String>> tagIDsStream() async* {
+  Stream<Either<TTagIDStreamException, Option<String>>> tagIDsStream() async* {
+    String? lastTagID;
+
     try {
       final availability = await FlutterNfcKit.nfcAvailability;
 
@@ -22,9 +24,21 @@ class TPhysicalNFCClient implements TNFCClient {
       while (true) {
         try {
           final tag = await FlutterNfcKit.poll();
-          yield right(tag.id);
+          await FlutterNfcKit.finish();
+
+          if (tag.id != lastTagID) {
+            lastTagID = tag.id;
+            yield right(some(tag.id));
+          }
         } on PlatformException catch (exception) {
-          if (exception.code == '408') {}
+          if (exception.code == '408') {
+            if (lastTagID != null) {
+              lastTagID = null;
+              yield right(none());
+            }
+          } else {
+            rethrow;
+          }
         }
       }
     } catch (exception) {
