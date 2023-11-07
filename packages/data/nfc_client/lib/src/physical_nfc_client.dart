@@ -24,11 +24,9 @@ class TPhysicalNFCClient implements TNFCClient {
       while (true) {
         try {
           final tag = await FlutterNfcKit.poll(
-            timeout: null,
-            androidPlatformSound: true,
+            androidPlatformSound: false,
             androidCheckNDEF: false,
           );
-          print(tag.id);
           yield right(tag.id);
         } on PlatformException catch (exception) {
           // 408: session timeout
@@ -39,7 +37,6 @@ class TPhysicalNFCClient implements TNFCClient {
       try {
         await FlutterNfcKit.finish();
       } catch (_) {}
-      print(exception);
       yield left(TTagIDStreamException.unknown);
     }
   }
