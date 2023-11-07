@@ -1,4 +1,4 @@
-name: tnfc_client
+name: tplayer_bloc
 version: 0.1.0+1
 publish_to: none
 
@@ -6,13 +6,15 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
+  bloc: ^8.1.2
   dartz: ^0.10.1
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
-  flutter_nfc_kit:
-    git: https://github.com/nfcim/flutter_nfc_kit.git
+  tnfc_repository:
 
 dev_dependencies:
+  bloc_test: ^9.1.5
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0

@@ -19,6 +19,9 @@ dependencies:
   meta: ^1.9.1
   signed_spacing_flex: ^1.0.0
   tcore:
+  tnfc_client:
+  tnfc_repository:
+  tplayer_ui:
 
 dev_dependencies:
   bloc_test: ^9.1.4

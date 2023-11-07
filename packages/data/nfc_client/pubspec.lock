@@ -81,10 +81,11 @@ packages:
   flutter_nfc_kit:
     dependency: "direct main"
     description:
-      name: flutter_nfc_kit
-      sha256: d4cdd729257c26ef8ddee5a87a7a899eb69c990b44f41dbb56d341867b8547d1
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: cc5c098700e618ba5629dbc33a00fce1cae12863
+      url: "https://github.com/nfcim/flutter_nfc_kit.git"
+    source: git
     version: "3.4.1"
   flutter_test:
     dependency: "direct dev"

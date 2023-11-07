@@ -1,0 +1,10 @@
+# melos_managed_dependency_overrides: tnfc_client,tnfc_repository,tplayer_bloc,tcore
+dependency_overrides:
+  tcore:
+    path: ../../../core
+  tnfc_client:
+    path: ../../../data/nfc_client
+  tnfc_repository:
+    path: ../../../domain/nfc_repository
+  tplayer_bloc:
+    path: ../player_bloc

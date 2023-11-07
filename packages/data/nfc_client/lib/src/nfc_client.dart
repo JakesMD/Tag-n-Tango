@@ -9,5 +9,5 @@ abstract interface class TNFCClient {
   ///
   /// The stream emits either a [TTagIDStreamException] on error, or a tag ID
   /// string on success.
-  Stream<Either<TTagIDStreamException, Option<String>>> tagIDsStream();
+  Stream<Either<TTagIDStreamException, String>> tagIDStream();
 }

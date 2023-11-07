@@ -1,0 +1,10 @@
+{
+    "@@locale": "en",
+    "measuringUnit_pieces_abbr": "pcs",
+    "measuringUnit_grams_abbr": "g",
+    "measuringUnit_milliliters_abbr": "ml",
+    "inputError_positiveNumber": "Please enter a positive number.",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "snackBar_error_general": "Oops! Something went wrong. Please check your internet connection and try again."
+}

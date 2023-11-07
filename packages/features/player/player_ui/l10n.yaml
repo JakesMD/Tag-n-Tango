@@ -1,0 +1,7 @@
+arb-dir: lib/src/l10n/arb
+template-arb-file: intl_en.arb
+output-localization-file: localizations.g.dart
+output-class: TPlayerL10n
+nullable-getter: false
+output-dir: lib/src/l10n/generated
+synthetic-package: false

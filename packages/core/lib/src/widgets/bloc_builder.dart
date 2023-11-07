@@ -1,15 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// {@template BBlocBuilder}
+/// {@template TBlocBuilder}
 ///
 /// An extension on [BlocBuilder] that provides the bloc directly within the
 /// builder function, simplifying the widget tree.
 ///
 /// {@endtemplate}
-class BBlocBuilder<B extends StateStreamable<S>, S> extends BlocBuilder<B, S> {
-  /// {@macro BBlocBuilder}
-  BBlocBuilder({
+class TBlocBuilder<B extends StateStreamable<S>, S> extends BlocBuilder<B, S> {
+  /// {@macro TBlocBuilder}
+  TBlocBuilder({
     required Widget Function(
       BuildContext context,
       B bloc,

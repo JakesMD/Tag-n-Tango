@@ -29,7 +29,7 @@ void main() {
       late MockBloc result;
 
       await tester.pumpWidget(
-        BBlocBuilder(
+        TBlocBuilder(
           bloc: matcher,
           builder: (context, bloc, state) {
             result = bloc;
@@ -49,7 +49,7 @@ void main() {
       await tester.pumpWidget(
         BlocProvider.value(
           value: matcher,
-          child: BBlocBuilder<MockBloc, MockBlocState>(
+          child: TBlocBuilder<MockBloc, MockBlocState>(
             builder: (context, bloc, state) {
               result = bloc;
               return Container();

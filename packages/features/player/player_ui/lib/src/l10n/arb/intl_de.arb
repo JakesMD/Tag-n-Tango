@@ -1,0 +1,10 @@
+{
+    "@@locale": "de",
+    "measuringUnit_pieces_abbr": "Stk",
+    "measuringUnit_grams_abbr": "g",
+    "measuringUnit_milliliters_abbr": "ml",
+    "inputError_positiveNumber": "Bitte geben Sie eine positive Zahl ein.",
+    "ok": "Ok",
+    "cancel": "Abbrechen",
+    "snackBar_error_general": "Hoppla! Etwas ist schiefgelaufen. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."
+}

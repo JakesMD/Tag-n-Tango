@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: tnfc_client,tnfc_repository
+dependency_overrides:
+  tnfc_client:
+    path: ../../../data/nfc_client
+  tnfc_repository:
+    path: ../../../domain/nfc_repository

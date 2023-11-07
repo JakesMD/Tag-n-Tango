@@ -1,14 +1,14 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 import 'package:tnfc_client/nfc_client.dart';
 
-/// The physical NFC client that reads from NFC tags.
+/// Physical NFC client implementation using Flutter NFC Kit plugin.
 class TPhysicalNFCClient implements TNFCClient {
   @override
-  Stream<Either<TTagIDStreamException, Option<String>>> tagIDsStream() async* {
-    String? lastTagID;
-
+  Stream<Either<TTagIDStreamException, String>> tagIDStream() async* {
     try {
       final availability = await FlutterNfcKit.nfcAvailability;
 
@@ -23,25 +23,23 @@ class TPhysicalNFCClient implements TNFCClient {
 
       while (true) {
         try {
-          final tag = await FlutterNfcKit.poll();
-          await FlutterNfcKit.finish();
-
-          if (tag.id != lastTagID) {
-            lastTagID = tag.id;
-            yield right(some(tag.id));
-          }
+          final tag = await FlutterNfcKit.poll(
+            timeout: null,
+            androidPlatformSound: true,
+            androidCheckNDEF: false,
+          );
+          print(tag.id);
+          yield right(tag.id);
         } on PlatformException catch (exception) {
-          if (exception.code == '408') {
-            if (lastTagID != null) {
-              lastTagID = null;
-              yield right(none());
-            }
-          } else {
-            rethrow;
-          }
+          // 408: session timeout
+          if (exception.code != '408') rethrow;
         }
       }
     } catch (exception) {
+      try {
+        await FlutterNfcKit.finish();
+      } catch (_) {}
+      print(exception);
       yield left(TTagIDStreamException.unknown);
     }
   }

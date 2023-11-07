@@ -1,9 +1,10 @@
-// coverage:ignore-file
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tcore/core.dart';
+import 'package:tnfc_client/nfc_client.dart';
+import 'package:tnfc_repository/nfc_repository.dart';
+import 'package:tplayer_ui/player_ui.dart';
 
 part 'app.g.dart';
 
@@ -13,9 +14,13 @@ class TagNTangoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TApp(
-      providers: [RepositoryProvider(create: (context) => Object())],
+      providers: [
+        RepositoryProvider(
+          create: (context) => TNFCRepository(nfcClient: TPhysicalNFCClient()),
+        ),
+      ],
       routerConfig: GoRouter(
-        initialLocation: '/cards',
+        initialLocation: '/test',
         routes: $appRoutes,
       ),
       localizationsDelegates: const [],
@@ -26,9 +31,7 @@ class TagNTangoApp extends StatelessWidget {
 @TypedGoRoute<HomeRoute>(
   path: '/',
   routes: <TypedGoRoute<GoRouteData>>[
-    TypedGoRoute<TCardsPageRoute>(
-      path: 'cards',
-    ),
+    TypedGoRoute<TTestRoute>(path: 'test'),
   ],
 )
 class HomeRoute extends GoRouteData {
@@ -38,11 +41,9 @@ class HomeRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => Container();
 }
 
-class TCardsPageRoute extends GoRouteData {
+class TTestRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Cards')),
-    );
+    return const TTestPage();
   }
 }
