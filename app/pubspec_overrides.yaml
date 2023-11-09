@@ -1,7 +1,9 @@
-# melos_managed_dependency_overrides: tcore,tnfc_client,tnfc_repository,tplayer_bloc,tplayer_ui
+# melos_managed_dependency_overrides: tcore,tnfc_client,tnfc_repository,tplayer_bloc,tplayer_ui,tfile_picker_client,tstorage_client,tstorage_repository
 dependency_overrides:
   tcore:
     path: ../packages/core
+  tfile_picker_client:
+    path: ../packages/data/file_picker_client
   tnfc_client:
     path: ../packages/data/nfc_client
   tnfc_repository:
@@ -10,3 +12,7 @@ dependency_overrides:
     path: ../packages/features/player/player_bloc
   tplayer_ui:
     path: ../packages/features/player/player_ui
+  tstorage_client:
+    path: ../packages/data/storage_client
+  tstorage_repository:
+    path: ../packages/domain/storage_repository

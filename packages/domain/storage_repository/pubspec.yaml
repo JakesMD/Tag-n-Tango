@@ -9,6 +9,7 @@ dependencies:
   dartz: ^0.10.1
   flutter:
     sdk: flutter
+  rxdart: ^0.27.7
   tcore:
   tfile_picker_client:
   tstorage_client:

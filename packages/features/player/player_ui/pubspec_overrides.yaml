@@ -1,10 +1,16 @@
-# melos_managed_dependency_overrides: tnfc_client,tnfc_repository,tplayer_bloc,tcore
+# melos_managed_dependency_overrides: tnfc_client,tnfc_repository,tplayer_bloc,tcore,tfile_picker_client,tstorage_client,tstorage_repository
 dependency_overrides:
   tcore:
     path: ../../../core
+  tfile_picker_client:
+    path: ../../../data/file_picker_client
   tnfc_client:
     path: ../../../data/nfc_client
   tnfc_repository:
     path: ../../../domain/nfc_repository
   tplayer_bloc:
     path: ../player_bloc
+  tstorage_client:
+    path: ../../../data/storage_client
+  tstorage_repository:
+    path: ../../../domain/storage_repository

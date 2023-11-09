@@ -4,3 +4,4 @@
 library tplayer_bloc;
 
 export 'src/tag_id_stream/bloc.dart';
+export 'src/tag_stream/bloc.dart';

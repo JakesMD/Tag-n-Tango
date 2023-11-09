@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:tcore/core.dart';
 import 'package:tfile_picker_client/file_picker_client.dart';
 import 'package:tstorage_client/storage_client.dart';
@@ -26,43 +29,62 @@ class TStorageRepository {
   /// The file picker client used for selecting playlist files.
   final TFilePickerClient filePickerClient;
 
-  TSettings? _settings;
+  final _settings = BehaviorSubject<TSettings>();
+
+  Future<Either<TSettingsSaveException, Unit>> _saveSettings(
+    TSettings settings,
+  ) async {
+    final result = await storageClient.saveSettings(settings: settings);
+
+    return result.fold(
+      left,
+      (_) {
+        _settings.value = settings;
+        return right(unit);
+      },
+    );
+  }
 
   Future<Either<TSettingsLoadException, TSettings>> _fetchSettings() async {
-    if (_settings == null) {
+    if (!_settings.hasValue) {
       final result = await storageClient.loadSettings();
       return result.fold(left, (settings) {
-        _settings = settings;
+        _settings.value = settings;
         return right(settings);
       });
     }
 
-    return right(_settings!); // coverage:ignore-line
+    return right(_settings.value); // coverage:ignore-line
   }
 
-  /// Fetches the tag with the given [tagID] from the stored settings.
+  /// Streams the tag with the given [tagID] from the stored settings.
   ///
-  /// If no match is found, returns an empty tag with that [tagID].
+  /// If no match is found, yields an empty tag with that [tagID].
   ///
-  /// Returns a [TTagFetchException] on failure and the queried [TTag] on
+  /// Yields a [TTagStreamException] on failure and the queried [TTag] on
   /// success.
-  Future<Either<TTagFetchException, TTag>> fetchTag({
+  Stream<Either<TTagStreamException, TTag>> tagStream({
     required String tagID,
-  }) async {
-    return (await _fetchSettings()).fold(
-      (exception) => left(
-        switch (exception) {
+  }) async* {
+    final result = await _fetchSettings();
+
+    if (result.isLeft()) {
+      yield left(
+        switch (result.tAsLeft()) {
           TSettingsLoadException.unknown =>
-            TTagFetchException.settingsLoadFailure,
+            TTagStreamException.settingsLoadFailure,
         },
-      ),
-      (settings) => right(
-        settings.tags.firstWhere(
-          (tag) => tag.id == tagID,
-          orElse: () => TTag.empty(id: tagID),
-        ),
-      ),
-    );
+      );
+    } else {
+      await for (final settings in _settings.stream) {
+        yield right(
+          settings.tags.firstWhere(
+            (tag) => tag.id == tagID,
+            orElse: () => TTag.empty(id: tagID),
+          ),
+        );
+      }
+    }
   }
 
   /// Adds the given audio files to the playlist for the provided tag.
@@ -113,17 +135,15 @@ class TStorageRepository {
                     ..addAll(files.map((file) => file.path)),
                 );
 
-                _settings = settings.copyWith(
+                final updatedSettings = settings.copyWith(
                   tags: Set.from(settings.tags)
                     ..removeWhere((tag) => tag.id == updatedTag.id)
                     ..add(updatedTag),
                 );
 
-                final result = await storageClient.saveSettings(
-                  settings: _settings!,
-                );
+                final saveResult = await _saveSettings(updatedSettings);
 
-                return result.fold(
+                return saveResult.fold(
                   (exception) => left(
                     switch (exception) {
                       TSettingsSaveException.unknown =>
@@ -190,15 +210,13 @@ class TStorageRepository {
             ..removeWhere((file) => file == filePath),
         );
 
-        _settings = settings.copyWith(
+        final updatedSettings = settings.copyWith(
           tags: Set.from(settings.tags)
             ..removeWhere((tag) => tag.id == updatedTag.id)
             ..add(updatedTag),
         );
 
-        final saveResult = await storageClient.saveSettings(
-          settings: _settings!,
-        );
+        final saveResult = await _saveSettings(updatedSettings);
 
         return saveResult.fold(
           (exception) => left(

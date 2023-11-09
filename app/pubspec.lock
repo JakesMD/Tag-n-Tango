@@ -297,6 +297,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  file_picker:
+    dependency: transitive
+    description:
+      name: file_picker
+      sha256: "4e42aacde3b993c5947467ab640882c56947d9d27342a5b6f2895b23956954a6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.1"
   fixnum:
     dependency: transitive
     description:
@@ -332,6 +340,14 @@ packages:
       url: "https://github.com/nfcim/flutter_nfc_kit.git"
     source: git
     version: "3.4.1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: b068ffc46f82a55844acfa4fdbb61fad72fa2aef0905548419d97f0f95c456da
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.17"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -686,6 +702,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "0c7c0cedd93788d996e33041ffecda924cc54389199cde4e6a34b440f50044cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.27.7"
   shelf:
     dependency: transitive
     description:
@@ -850,6 +874,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.3"
+  tfile_picker_client:
+    dependency: "direct overridden"
+    description:
+      path: "../packages/data/file_picker_client"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   timing:
     dependency: transitive
     description:
@@ -883,6 +914,20 @@ packages:
     dependency: "direct main"
     description:
       path: "../packages/features/player/player_ui"
+      relative: true
+    source: path
+    version: "0.1.0+1"
+  tstorage_client:
+    dependency: "direct overridden"
+    description:
+      path: "../packages/data/storage_client"
+      relative: true
+    source: path
+    version: "0.1.0+1"
+  tstorage_repository:
+    dependency: "direct overridden"
+    description:
+      path: "../packages/domain/storage_repository"
       relative: true
     source: path
     version: "0.1.0+1"

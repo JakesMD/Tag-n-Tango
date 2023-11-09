@@ -24,36 +24,36 @@ void main() {
       );
     });
 
-    group('fetchTag Tests', () {
+    group('tagStream Tests', () {
       test('''
       Given: storage client has failure,
-      When: fetch tag,
+      When: stream tag,
       Then: returns "settings load failure"''', () async {
         when(() => storageClient.loadSettings()).thenAnswer(
           (_) async => left(TSettingsLoadException.unknown),
         );
 
-        final result = await storageRepository.fetchTag(tagID: '');
+        final result = await storageRepository.tagStream(tagID: '').first;
 
-        expect(result, left(TTagFetchException.settingsLoadFailure));
+        expect(result, left(TTagStreamException.settingsLoadFailure));
       });
 
       test('''
       Given: storage client has success but tag not registered,
-      When: fetch tag,
+      When: stream tag,
       Then: returns empty tag with given ID''', () async {
         when(() => storageClient.loadSettings()).thenAnswer(
           (_) async => right(const TSettings.empty()),
         );
 
-        final result = await storageRepository.fetchTag(tagID: '123');
+        final result = await storageRepository.tagStream(tagID: '123').first;
 
         expect(result, right(const TTag.empty(id: '123')));
       });
 
       test('''
       Given: storage client has success and tag registered,
-      When: fetch tag,
+      When: stream tag,
       Then: returns tag with given ID''', () async {
         final matcher = const TTag.empty(id: '123').copyWith(
           playlist: {'someFilePath'},
@@ -62,7 +62,7 @@ void main() {
           (_) async => right(const TSettings.empty().copyWith(tags: {matcher})),
         );
 
-        final result = await storageRepository.fetchTag(tagID: '123');
+        final result = await storageRepository.tagStream(tagID: '123').first;
 
         expect(result, right(matcher));
       });
@@ -199,7 +199,7 @@ void main() {
       });
     });
 
-    group('addFilesToTagPlaylist Tests', () {
+    group('deleteFilesFromTagPlaylist Tests', () {
       test('''
       Given: fetch settings has failure,
       When: delete file from playlist,

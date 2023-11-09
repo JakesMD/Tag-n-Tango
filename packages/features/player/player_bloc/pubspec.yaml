@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   tnfc_repository:
+  tstorage_repository:
 
 dev_dependencies:
   bloc_test: ^9.1.5
