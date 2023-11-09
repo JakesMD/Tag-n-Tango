@@ -15,8 +15,8 @@ RouteBase get $homeRoute => GoRouteData.$route(
       factory: $HomeRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
-          path: 'test',
-          factory: $TTestRouteExtension._fromState,
+          path: 'player',
+          factory: $TPlayerRouteExtension._fromState,
         ),
       ],
     );
@@ -38,11 +38,11 @@ extension $HomeRouteExtension on HomeRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $TTestRouteExtension on TTestRoute {
-  static TTestRoute _fromState(GoRouterState state) => TTestRoute();
+extension $TPlayerRouteExtension on TPlayerRoute {
+  static TPlayerRoute _fromState(GoRouterState state) => TPlayerRoute();
 
   String get location => GoRouteData.$location(
-        '/test',
+        '/player',
       );
 
   void go(BuildContext context) => context.go(location);

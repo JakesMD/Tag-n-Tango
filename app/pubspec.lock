@@ -875,7 +875,7 @@ packages:
     source: hosted
     version: "0.5.3"
   tfile_picker_client:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../packages/data/file_picker_client"
       relative: true
@@ -918,14 +918,14 @@ packages:
     source: path
     version: "0.1.0+1"
   tstorage_client:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../packages/data/storage_client"
       relative: true
     source: path
     version: "0.1.0+1"
   tstorage_repository:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../packages/domain/storage_repository"
       relative: true

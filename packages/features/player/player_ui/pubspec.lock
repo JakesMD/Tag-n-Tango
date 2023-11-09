@@ -470,7 +470,7 @@ packages:
     source: path
     version: "0.1.0+1"
   tstorage_repository:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../../domain/storage_repository"
       relative: true

@@ -3,4 +3,4 @@
 library tplayer_ui;
 
 export 'src/l10n/l10n.dart';
-export 'src/pages/test/page.dart';
+export 'src/pages/player/page.dart';

@@ -16,6 +16,7 @@ dependencies:
   tcore:
   tnfc_repository:
   tplayer_bloc:
+  tstorage_repository:
 
 dev_dependencies:
   flutter_test:
