@@ -6,6 +6,12 @@ import 'package:tstorage_repository/storage_repository.dart';
 part 'event.dart';
 part 'state.dart';
 
+/// {@template TTagPlaylistAdditionBloc}
+///
+/// BLoC responsible for handling the business logic of adding files to a tag
+/// playlist.
+///
+/// {@endtemplate}
 class TTagPlaylistAdditionBloc
     extends Bloc<_TTagPlaylistAdditionEvent, TTagPlaylistAdditionState> {
   /// {@macro TTagPlaylistAdditionBloc}
@@ -15,6 +21,7 @@ class TTagPlaylistAdditionBloc
     on<_TTagPlaylistAdditionCompleted>(_onCompleted);
   }
 
+  /// The repository this bloc will use for storage operations.
   final TStorageRepository repository;
 
   Future<void> _onTriggered(

@@ -27,13 +27,17 @@ final class TTagIDStreamTagBeeped extends TTagIDStreamState {
   List<Object?> get props => [tagID];
 }
 
+/// {@template TTagIDStreamFailure}
+///
 /// Indicates that an exception occurred while reading tag IDs from the NFC
-/// stream. Contains the [TTagIDStreamException] that was thrown.
+/// stream. Contains the [TTagIDStreamException] that occurred.
+///
+/// {@endtemplate}
 final class TTagIDStreamFailure extends TTagIDStreamState {
   /// {@macro TTagIDStreamFailure}
   TTagIDStreamFailure({required this.exception});
 
-  /// The exception that occurred when reading from the NFC stream.
+  /// The exception that occurred.
   final TTagIDStreamException exception;
 
   @override
