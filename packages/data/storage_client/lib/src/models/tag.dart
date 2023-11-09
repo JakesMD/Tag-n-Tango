@@ -16,7 +16,7 @@ class TTag with EquatableMixin {
   /// {@macro TTag}
   ///
   /// The fields are prefilled (partly for testing purposes).
-  const TTag.empty({required this.id}) : playlist = const [];
+  const TTag.empty({required this.id}) : playlist = const {};
 
   /// {@macro TTag}
   ///
@@ -24,7 +24,7 @@ class TTag with EquatableMixin {
   factory TTag.fromJSON({required Map<String, dynamic> json}) {
     return TTag(
       id: json['id'] as String,
-      playlist: json['playlist'] as List<String>,
+      playlist: json['playlist'] as Set<String>,
     );
   }
 
@@ -32,7 +32,16 @@ class TTag with EquatableMixin {
   final String id;
 
   /// The list of audio file paths the tag represents.
-  final List<String> playlist;
+  final Set<String> playlist;
+
+  /// Creates a copy of this [TTag] instance with the given fields replaced
+  /// with new values.
+  TTag copyWith({Set<String>? playlist}) {
+    return TTag(
+      id: id,
+      playlist: playlist ?? this.playlist,
+    );
+  }
 
   /// Converts this [TTag] instance to a JSON-serializable Map.
   Map<String, dynamic> toJSON() => {

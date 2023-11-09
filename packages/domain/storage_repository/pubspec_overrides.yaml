@@ -1,0 +1,8 @@
+# melos_managed_dependency_overrides: tfile_picker_client,tstorage_client,tcore
+dependency_overrides:
+  tcore:
+    path: ../../core
+  tfile_picker_client:
+    path: ../../data/file_picker_client
+  tstorage_client:
+    path: ../../data/storage_client

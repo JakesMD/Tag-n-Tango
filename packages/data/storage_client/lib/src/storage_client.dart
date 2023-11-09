@@ -50,15 +50,15 @@ class TStorageClient {
     }
   }
 
-  /// Deletes the provided [file].
+  /// Deletes the File at the provided [filePath].
   ///
   /// Returns a [Right] with [Unit] if successful, or a [Left] with a
   /// [TFileDeletionException] if an error occurs.
   Future<Either<TFileDeletionException, Unit>> deleteFile({
-    required File file,
+    required String filePath,
   }) async {
     try {
-      await file.delete();
+      await File(filePath).delete();
       return right(unit);
     } catch (exception) {
       return left(TFileDeletionException.unknown);

@@ -14,21 +14,27 @@ class TSettings with EquatableMixin {
   /// {@macro TSettings}
   ///
   /// The fields are prefilled (partly for testing purposes).
-  const TSettings.empty() : tags = const [];
+  const TSettings.empty() : tags = const {};
 
   /// {@macro TSettings}
   ///
   /// Constructs a [TSettings] from a JSON map.
   factory TSettings.fromJSON({required Map<String, dynamic> json}) {
     return TSettings(
-      tags: List<Map<String, dynamic>>.from(json['tags'] as List)
+      tags: Set<Map<String, dynamic>>.from(json['tags'] as List)
           .map((json) => TTag.fromJSON(json: json))
-          .toList(),
+          .toSet(),
     );
   }
 
   /// The list of NFC tags the user has associated playlists to.
-  final List<TTag> tags;
+  final Set<TTag> tags;
+
+  /// Creates a copy of this [TSettings] instance with the given fields replaced
+  /// with new values.
+  TSettings copyWith({Set<TTag>? tags}) {
+    return TSettings(tags: tags ?? this.tags);
+  }
 
   /// Converts this [TSettings] instance to a JSON-serializable Map.
   Map<String, dynamic> toJSON() => {
