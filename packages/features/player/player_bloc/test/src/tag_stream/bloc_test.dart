@@ -16,29 +16,41 @@ void main() {
     late TTagStreamBloc bloc;
 
     setUp(() {
-      controller = StreamController()
-        ..addStream(const Stream.empty()..asBroadcastStream());
-
       repo = MockTStorageRepository();
-      when(() => repo.tagStream(tagID: '123')).thenAnswer(
-        (_) => controller.stream,
-      );
+      controller = StreamController();
 
-      bloc = TTagStreamBloc(repository: repo, tagID: '123');
+      when(() => repo.tagStream(tagID: '123'))
+          .thenAnswer((_) => controller.stream);
+
+      bloc = TTagStreamBloc(repository: repo);
     });
 
     test('''
         When: first initialized,
-        Then: state is "loading"''', () {
-      expect(bloc.state, TTagStreamLoading());
+        Then: state is "initial"''', () {
+      expect(bloc.state, TTagStreamInitial());
     });
+
+    blocTest(
+      '''
+        When: new tag added,
+        Then: emit "loading" state''',
+      build: () => bloc,
+      act: (bloc) => bloc.add(TTagStreamNewTagBeeped(tagID: '123')),
+      expect: () => [TTagStreamLoading()],
+    );
 
     blocTest(
       '''
         When: client updates with tag ID,
         Then: emit "success" state with new tag''',
       build: () => bloc,
-      act: (bloc) => controller.add(right(const TTag.empty(id: '123'))),
+      act: (bloc) async {
+        bloc.add(TTagStreamNewTagBeeped(tagID: '123'));
+        await Future.delayed(Duration.zero);
+        controller.add(right(const TTag.empty(id: '123')));
+      },
+      skip: 1,
       expect: () => [TTagStreamSuccess(tag: const TTag.empty(id: '123'))],
     );
 
@@ -46,9 +58,12 @@ void main() {
       '''
         When: backend has error, Then: emit "failure" state''',
       build: () => bloc,
-      act: (bloc) => controller.add(
-        left(TTagStreamException.settingsLoadFailure),
-      ),
+      act: (bloc) async {
+        bloc.add(TTagStreamNewTagBeeped(tagID: '123'));
+        await Future.delayed(Duration.zero);
+        controller.add(left(TTagStreamException.settingsLoadFailure));
+      },
+      skip: 1,
       expect: () => [
         TTagStreamFailure(exception: TTagStreamException.settingsLoadFailure),
       ],
@@ -57,6 +72,9 @@ void main() {
     test('''
         When: bloc is no longer needed,
         Then: cancel subscription with client''', () async {
+      bloc.add(TTagStreamNewTagBeeped(tagID: '123'));
+      await Future.delayed(Duration.zero);
+
       await bloc.close();
 
       expect(controller.hasListener, false);
@@ -64,7 +82,8 @@ void main() {
 
     tearDown(() async {
       await bloc.close();
-      await controller.close();
+
+      if (controller.hasListener) await controller.close();
     });
   });
 }

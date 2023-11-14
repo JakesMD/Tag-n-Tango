@@ -30,7 +30,7 @@ class TStorageClient {
   }) async {
     try {
       final appDirectory = await _getAppDirectory();
-      final destinationDirectory = Directory('${appDirectory.path}/audio/');
+      final destinationDirectory = Directory('${appDirectory.path}/audio');
       await destinationDirectory.create(recursive: true);
 
       final copiedFiles = <File>[];
@@ -75,7 +75,9 @@ class TStorageClient {
       final settingsFile = File('${appDirecory.path}/settings.json');
 
       // ignore: avoid_slow_async_io
-      if (!await settingsFile.exists()) return right(const TSettings.empty());
+      if (!await settingsFile.exists()) {
+        return right(const TSettings.empty());
+      }
 
       final json = jsonDecode(
         await settingsFile.readAsString(),

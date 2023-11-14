@@ -19,13 +19,10 @@ class TSettings with EquatableMixin {
   /// {@macro TSettings}
   ///
   /// Constructs a [TSettings] from a JSON map.
-  factory TSettings.fromJSON({required Map<String, dynamic> json}) {
-    return TSettings(
-      tags: Set<Map<String, dynamic>>.from(json['tags'] as List)
-          .map((json) => TTag.fromJSON(json: json))
-          .toSet(),
-    );
-  }
+  TSettings.fromJSON({required Map<String, dynamic> json})
+      : tags = Set<Map<String, dynamic>>.from(json['tags'] as List)
+            .map((json) => TTag.fromJSON(json: json))
+            .toSet();
 
   /// The list of NFC tags the user has associated playlists to.
   final Set<TTag> tags;

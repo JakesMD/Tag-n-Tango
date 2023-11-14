@@ -6,6 +6,10 @@ sealed class TTagStreamState with EquatableMixin {
   List<Object?> get props => [];
 }
 
+/// Initial state of the [TTagStreamBloc]. Indicates that no tag has been beeped
+/// yet.
+final class TTagStreamInitial extends TTagStreamState {}
+
 /// Indicates that the tag data has not loaded yet.
 final class TTagStreamLoading extends TTagStreamState {}
 

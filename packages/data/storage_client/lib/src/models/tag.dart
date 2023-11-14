@@ -21,12 +21,9 @@ class TTag with EquatableMixin {
   /// {@macro TTag}
   ///
   /// Constructs a [TTag] from a JSON map.
-  factory TTag.fromJSON({required Map<String, dynamic> json}) {
-    return TTag(
-      id: json['id'] as String,
-      playlist: json['playlist'] as Set<String>,
-    );
-  }
+  TTag.fromJSON({required Map<String, dynamic> json})
+      : id = json['id'] as String,
+        playlist = (json['playlist'] as List<String>).toSet();
 
   /// The unique identifier stored on the physical tag.
   final String id;
@@ -46,7 +43,7 @@ class TTag with EquatableMixin {
   /// Converts this [TTag] instance to a JSON-serializable Map.
   Map<String, dynamic> toJSON() => {
         'id': id,
-        'playlist': playlist,
+        'playlist': playlist.toList(),
       };
 
   @override

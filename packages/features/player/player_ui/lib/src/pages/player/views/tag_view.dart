@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tcore/core.dart';
 import 'package:tplayer_bloc/player_bloc.dart';
-import 'package:tstorage_repository/storage_repository.dart';
+import 'package:tplayer_ui/src/pages/player/views/_views.dart';
 
+/// {@template TPlayerTagView}
+///
+/// Displays the data for a specific tag.
+///
+/// {@endtemplate}
 class TPlayerTagView extends StatelessWidget {
   /// {@macro TPlayerTagView}
   const TPlayerTagView({
@@ -11,36 +16,46 @@ class TPlayerTagView extends StatelessWidget {
     super.key,
   });
 
+  /// The ID of the tag to display data for.
   final String tagID;
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => TTagStreamBloc(
-            tagID: tagID,
-            repository: context.read<TStorageRepository>(),
+    return BlocListener<TTagIDStreamBloc, TTagIDStreamState>(
+      listener: (context, state) => context.read<TTagStreamBloc>().add(
+            TTagStreamNewTagBeeped(
+              tagID: (state as TTagIDStreamTagBeeped).tagID,
+            ),
           ),
-        ),
-      ],
-      child: Scaffold(
-        appBar: AppBar(title: Text(tagID)),
-        body: TBlocBuilder<TTagStreamBloc, TTagStreamState>(
-          builder: (context, bloc, state) => switch (state) {
-            TTagStreamLoading() => const LinearProgressIndicator(),
-            TTagStreamFailure() => const Text('Error'),
-            TTagStreamSuccess(tag: final tag) => ListView(
+      listenWhen: (_, state) => state is TTagIDStreamTagBeeped,
+      child: TBlocBuilder<TTagStreamBloc, TTagStreamState>(
+        builder: (context, bloc, state) => switch (state) {
+          TTagStreamInitial() => const TPlayerLoadingView(),
+          TTagStreamLoading() => const TPlayerLoadingView(),
+          TTagStreamFailure() => const TPlayerFailureView(),
+          TTagStreamSuccess(tag: final tag) => Scaffold(
+              appBar: AppBar(title: Text(tag.id)),
+              body: ListView(
                 children: tag.playlist
-                    .map((song) => ListTile(title: Text(song)))
+                    .map(
+                      (song) => ListTile(
+                        title: Text(song),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete_rounded),
+                          onPressed: () {},
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add_rounded),
-        ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () => context.read<TTagPlaylistAdditionBloc>().add(
+                      TTagPlaylistAdditionTriggered(tag: tag),
+                    ),
+                child: const Icon(Icons.add_rounded),
+              ),
+            ),
+        },
       ),
     );
   }

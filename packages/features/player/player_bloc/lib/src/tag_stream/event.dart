@@ -7,3 +7,16 @@ final class _TTagStreamUpdate extends _TTagStreamEvent {
 
   final Either<TTagStreamException, TTag> data;
 }
+
+/// {@template TTagStreamNewTagBeeped}
+///
+/// Notifies that a new tag has beeped. Contains the ID of the new tag.
+///
+/// {@endtemplate}
+final class TTagStreamNewTagBeeped extends _TTagStreamEvent {
+  /// {@macro TTagStreamNewTagBeeped}
+  TTagStreamNewTagBeeped({required this.tagID});
+
+  /// The ID of the tag that was beeped.
+  final String tagID;
+}

@@ -16,24 +16,25 @@ part 'state.dart';
 /// {@endtemplate}
 class TTagStreamBloc extends Bloc<_TTagStreamEvent, TTagStreamState> {
   /// {@macro TTagStreamBloc}
-  TTagStreamBloc({
-    required this.tagID,
-    required this.repository,
-  }) : super(TTagStreamLoading()) {
-    _subscribeToTagStream();
+  TTagStreamBloc({required this.repository}) : super(TTagStreamInitial()) {
     on<_TTagStreamUpdate>(_onUpdate);
+    on<TTagStreamNewTagBeeped>(_onNewTagBeeped);
   }
-
-  /// The ID of the tag that this bloc is managing the stream for.
-  final String tagID;
 
   /// The repository this bloc uses to get the tag stream.
   final TStorageRepository repository;
 
-  late StreamSubscription<Either<TTagStreamException, TTag>> _tagSubscription;
+  StreamSubscription<Either<TTagStreamException, TTag>>? _tagSubscription;
 
-  void _subscribeToTagStream() {
-    _tagSubscription = repository.tagStream(tagID: tagID).listen(
+  Future<void> _onNewTagBeeped(
+    TTagStreamNewTagBeeped event,
+    Emitter<TTagStreamState> emit,
+  ) async {
+    emit(TTagStreamLoading());
+
+    await _tagSubscription?.cancel();
+
+    _tagSubscription = repository.tagStream(tagID: event.tagID).listen(
           (event) => add(_TTagStreamUpdate(data: event)),
         );
   }
@@ -46,8 +47,8 @@ class TTagStreamBloc extends Bloc<_TTagStreamEvent, TTagStreamState> {
   }
 
   @override
-  Future<void> close() {
-    _tagSubscription.cancel();
+  Future<void> close() async {
+    await _tagSubscription?.cancel();
     return super.close();
   }
 }
