@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: taudio_client
+dependency_overrides:
+  taudio_client:
+    path: ../../data/audio_client

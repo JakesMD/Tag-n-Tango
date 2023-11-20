@@ -9,14 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  bloc:
+  audio_session:
     dependency: transitive
     description:
-      name: bloc
-      sha256: "3820f15f502372d979121de1f6b97bfcf1630ebff8fe1d52fb2b0bfa49be5b49"
+      name: audio_session
+      sha256: "768eadc8174b366b8b1b0b75e0518eea2bbd463d47a7938c54a2a0e6aa06946d"
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.2"
+    version: "0.1.17"
   boolean_selector:
     dependency: transitive
     description:
@@ -49,14 +49,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  convert:
-    dependency: transitive
-    description:
-      name: convert
-      sha256: "0f08b14755d163f6e2134cb58222dd25ea2a2ee8a195e53983d57c075324d592"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.1"
   crypto:
     dependency: transitive
     description:
@@ -73,22 +65,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
-  dynamic_color:
-    dependency: transitive
-    description:
-      name: dynamic_color
-      sha256: "8b8bd1d798bd393e11eddeaa8ae95b12ff028bf7d5998fc5d003488cd5f4ce2f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.6.8"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -105,49 +81,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  file_picker:
-    dependency: transitive
-    description:
-      name: file_picker
-      sha256: "4e42aacde3b993c5947467ab640882c56947d9d27342a5b6f2895b23956954a6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.1"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_bloc:
-    dependency: "direct main"
-    description:
-      name: flutter_bloc
-      sha256: e74efb89ee6945bcbce74a5b3a5a3376b088e5f21f55c263fc38cbdc6237faae
-      url: "https://pub.dev"
-    source: hosted
-    version: "8.1.3"
-  flutter_localizations:
-    dependency: "direct main"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  flutter_nfc_kit:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: cc5c098700e618ba5629dbc33a00fce1cae12863
-      url: "https://github.com/nfcim/flutter_nfc_kit.git"
-    source: git
-    version: "3.4.1"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      sha256: b068ffc46f82a55844acfa4fdbb61fad72fa2aef0905548419d97f0f95c456da
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.17"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -158,70 +96,30 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  go_router:
+  just_audio:
     dependency: transitive
     description:
-      name: go_router
-      sha256: e156bc1b2088eb5ece9351bccd48c3e1719a4858eacbd44e59162e98a68205d1
+      name: just_audio
+      sha256: b607cd1a43bac03d85c3aaee00448ff4a589ef2a77104e3d409889ff079bf823
       url: "https://pub.dev"
     source: hosted
-    version: "12.0.1"
-  google_fonts:
+    version: "0.9.36"
+  just_audio_platform_interface:
     dependency: transitive
     description:
-      name: google_fonts
-      sha256: f0b8d115a13ecf827013ec9fc883390ccc0e87a96ed5347a3114cac177ef18e8
+      name: just_audio_platform_interface
+      sha256: c3dee0014248c97c91fe6299edb73dc4d6c6930a2f4f713579cd692d9e47f4a1
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.0"
-  http:
+    version: "4.2.2"
+  just_audio_web:
     dependency: transitive
     description:
-      name: http
-      sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
+      name: just_audio_web
+      sha256: "134356b0fe3d898293102b33b5fd618831ffdc72bb7a1b726140abdf22772b70"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
-  http_parser:
-    dependency: transitive
-    description:
-      name: http_parser
-      sha256: "2aa08ce0341cc9b354a498388e30986515406668dbcc4f7c950c3e715496693b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.2"
-  intl:
-    dependency: "direct main"
-    description:
-      name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.18.1"
-  js:
-    dependency: transitive
-    description:
-      name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.6.7"
-  json_annotation:
-    dependency: transitive
-    description:
-      name: json_annotation
-      sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.8.1"
-  logging:
-    dependency: transitive
-    description:
-      name: logging
-      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
+    version: "0.4.9"
   matcher:
     dependency: transitive
     description:
@@ -254,22 +152,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  ndef:
-    dependency: transitive
-    description:
-      name: ndef
-      sha256: "634d2b5c6f2c186e953218bac9905f3f5e1824b15e30bd1ed6e03a91cdbc7293"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.3"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -342,14 +224,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.6"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.5"
   rxdart:
     dependency: transitive
     description:
@@ -358,14 +232,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
-  signed_spacing_flex:
-    dependency: transitive
-    description:
-      name: signed_spacing_flex
-      sha256: "81b93d54a97cfb650fa734466fbb32aec51b72343f2b9a1390647abfcb048a68"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -411,10 +277,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  tcore:
+  taudio_client:
     dependency: "direct main"
     description:
-      path: "../../../core"
+      path: "../../data/audio_client"
       relative: true
     source: path
     version: "0.1.0+1"
@@ -434,48 +300,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
-  tfile_picker_client:
-    dependency: "direct overridden"
-    description:
-      path: "../../../data/file_picker_client"
-      relative: true
-    source: path
-    version: "0.1.0+1"
-  tnfc_client:
-    dependency: "direct overridden"
-    description:
-      path: "../../../data/nfc_client"
-      relative: true
-    source: path
-    version: "0.1.0+1"
-  tnfc_repository:
-    dependency: "direct main"
-    description:
-      path: "../../../domain/nfc_repository"
-      relative: true
-    source: path
-    version: "0.1.0+1"
-  tplayer_bloc:
-    dependency: "direct main"
-    description:
-      path: "../player_bloc"
-      relative: true
-    source: path
-    version: "0.1.0+1"
-  tstorage_client:
-    dependency: "direct overridden"
-    description:
-      path: "../../../data/storage_client"
-      relative: true
-    source: path
-    version: "0.1.0+1"
-  tstorage_repository:
-    dependency: "direct main"
-    description:
-      path: "../../../domain/storage_repository"
-      relative: true
-    source: path
-    version: "0.1.0+1"
   typed_data:
     dependency: transitive
     description:
@@ -488,10 +312,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: b715b8d3858b6fa9f68f87d20d98830283628014750c2b09b6f516c1da4af2a7
+      sha256: df5a4d8f22ee4ccd77f8839ac7cb274ebc11ef9adcce8b92be14b797fe889921
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "4.2.1"
   vector_math:
     dependency: transitive
     description:

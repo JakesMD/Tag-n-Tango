@@ -10,7 +10,7 @@ sealed class TTagIDStreamState with EquatableMixin {
 /// yet.
 final class TTagIDStreamTagInitial extends TTagIDStreamState {}
 
-/// {@macro TTagIDStreamTagBeeped}
+/// {@template TTagIDStreamTagBeeped}
 ///
 /// Indicates that a new tag ID has been read from the NFC stream. Contains the
 /// tag ID string that was read.

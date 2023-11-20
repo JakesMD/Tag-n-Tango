@@ -6,7 +6,7 @@ import 'package:tplayer_bloc/player_bloc.dart';
 import 'package:tplayer_ui/src/pages/player/views/_views.dart';
 import 'package:tstorage_repository/storage_repository.dart';
 
-/// {@macro TPlayerPage}
+/// {@template TPlayerPage}
 ///
 /// The main page for the player feature.
 ///

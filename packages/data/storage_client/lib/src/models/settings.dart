@@ -6,7 +6,7 @@ import 'package:tstorage_client/storage_client.dart';
 /// The settings model containing user-configured tags and playlists.
 /// This is persisted locally.
 ///
-/// {@endtemplate TSettinge}
+/// {@endtemplate}
 class TSettings with EquatableMixin {
   /// {@macro TSettings}
   const TSettings({required this.tags});
